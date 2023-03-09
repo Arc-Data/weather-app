@@ -5,14 +5,36 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	font-family: 'Raleway', sans-serif;
+	color:white;
+	padding:0;
+	margin:0;
 }
 
 .overlay {
 	position: absolute;
 	inset: 0;
-	background:rgba(0,0,0,0.3);
+	background:rgba(0,0,0,0.6);
 }
 
 .page-content {
+	position:relative;
+	max-width:1200px;
+	width:100%;
+	margin:0 auto;
+	margin-top: 40px;
+	display:grid;
+}	
 
+h1 {
+	font-size:34px;
+}
+
+#search {
+	all:unset;
+	border-block-end: 1px solid white;
+	padding:10px;
+}
+
+#search::placeholder {
+	color:white;
 }
