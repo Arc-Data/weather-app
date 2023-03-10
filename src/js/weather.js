@@ -12,20 +12,20 @@ const weather = (() => {
 	const getLocationForecast = async(lat, lon) => {
 		const response = await fetch(`
 			http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}
-		`)
+		`);
 		const obj = response.json();
 		return obj;
-	}
+	};
 
 	const getWeather = async (location) => {
 		const locationWeather = await getLocationWeather(location);
 		const locationForecast = await getLocationForecast(locationWeather.coord.lat, locationWeather.coord.lon);
 		return locationWeather;
-	} 
+	};
 
 	return {
 		getWeather,
-	}
+	};
 })();
 
 export default weather; 

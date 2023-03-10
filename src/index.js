@@ -1,4 +1,3 @@
 import "./main.css";
-import weather from './js/weather.js';
+import DOM from './js/DOM';
 
-weather.getWeather("Manila");
