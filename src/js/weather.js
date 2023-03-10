@@ -5,8 +5,14 @@ const weather = (() => {
 		const response = await fetch(`
 			http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${apiKey}
 		`);
-		const obj = await response.json();
-		return obj;
+
+		if(response.status == 200) {
+			const obj = await response.json();
+			return obj;
+		}
+
+		return "not found";
+
 	};
 
 	const getLocationForecast = async(lat, lon) => {
@@ -18,9 +24,21 @@ const weather = (() => {
 	};
 
 	const getWeather = async (location) => {
+		const data = {};
 		const locationWeather = await getLocationWeather(location);
+		if(locationWeather === "not found") {
+			return data;
+		}
 		const locationForecast = await getLocationForecast(locationWeather.coord.lat, locationWeather.coord.lon);
-		return locationWeather;
+		data.name = locationWeather.name;
+		Object.assign(
+			data, 
+			locationWeather.main, 
+			locationWeather.weather[0]
+		);
+
+		return data;
+
 	};
 
 	return {
