@@ -6,10 +6,14 @@ const DOM = (() => {
 	const cityName = document.querySelector('#city-name');
 	const weatherDesc = document.querySelector('#weather-desc');
 
+	let displayMetric = 'C';
+
 	const displayData = async () => {
-		const obj = await weather.getWeather(searchInput.value || "Philippines");
-		console.log(obj);
+		const obj = await weather.getWeather(searchInput.value || "Philippines", displayMetric);
+
 		if(Object.keys(obj).length == 0) {
+			alert("City not found");
+			searchInput.value = "";
 			return;
 		}
 
