@@ -15,6 +15,8 @@ const weather = (() => {
 			feels: obj.main.feels_like, 
 			temp: obj.main.temp,
 			description: obj.weather[0].description,
+			icon: obj.weather[0].icon,
+			country: obj.sys.country,
 		};
 	};
 
