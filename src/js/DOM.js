@@ -10,6 +10,7 @@ const DOM = (() => {
 	const temperature = document.querySelector('#temperature');
 	const humidity = document.querySelector('#humidity');
 	const date = document.querySelector('#date');
+	const forecastContainer = document.querySelector('.forecast-content');
 
 	let unitCode = 'C';
 	let unitSymbol;
@@ -29,6 +30,33 @@ const DOM = (() => {
 		container.appendChild(img);
 	};
 
+	const resetForecastContainer = () => {
+		while(forecastContainer.lastChild) {
+			forecastContainer.removeChild(forecastContainer.firstChild);
+		}
+	};
+
+	const createForecastCard = (weather) => {
+		const div = document.createElement('div');
+		div.classList.add('forecast-card');
+		const date = document.createElement('p');
+		date.textContent = weather.date;
+		const imgContainer = document.createElement('div');
+		imgContainer.textContent = weather.description; 
+		const h2 = document.createElement('h2');
+		h2.textContent = Math.floor(weather.temp);
+		
+		div.appendChild(date);
+		div.appendChild(imgContainer);
+		div.appendChild(h2);
+		forecastContainer.appendChild(div);
+	};
+
+	const generateForecastCards = (obj) => {
+		resetForecastContainer();
+		obj.forEach(i => createForecastCard(i));
+	};
+
 	const displayData = async () => {
 		const obj = await weather.getWeather(searchInput.value || "Philippines", unitCode);
 
@@ -45,6 +73,9 @@ const DOM = (() => {
 		feelsLike.textContent = `${obj.feels}`;
 		rainChance.textContent = `${obj.list[0].pop * 100} %`;
 		humidity.textContent = obj.humidity + " %";
+
+		generateForecastCards(obj.list);
+
 	};
 
 	const searchCity = (e) => {
@@ -53,12 +84,6 @@ const DOM = (() => {
 	};
 
 	const init = () => {
-		// date.textContent = new Date().toLocaleDateString("en-US", {
-		// 	month: "long",
-		// 	day: "numeric",
-		// 	year: "numeric",
-		// });
-		// getUnitSymbol();
 		displayData();
 	};
 

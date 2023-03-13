@@ -22,11 +22,16 @@ const weather = (() => {
 	};
 
 	const ForecastData = (obj) => {
+		let dateString = obj.dt_txt.split(" ")[0];
+		dateString = new Date(dateString).toLocaleString("en-US",{
+			weekday : "short",
+		});
+
 		return {
 			pop: obj.pop,
-			temp_max: obj.main.temp_max,
-			temp_min: obj.main.temp_min,
+			temp: obj.main.temp,
 			description: obj.weather[0].main,
+			date: dateString,
 		};
 	};
 
@@ -38,8 +43,8 @@ const weather = (() => {
 			forecast.list[26],
 			forecast.list[34],
 		];
+		console.log(forecastList[0]);
 		const list = forecastList.map( i => ForecastData(i));
-
 		return {
 			list: list
 		};
@@ -81,6 +86,7 @@ const weather = (() => {
 			locationWeather,
 			locationForecast
 		);
+
 
 		// console.log(data);
 		return data;
