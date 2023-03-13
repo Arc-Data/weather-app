@@ -10,7 +10,8 @@ const DOM = (() => {
 	const temperature = document.querySelector('#temperature');
 	const humidity = document.querySelector('#humidity');
 	const date = document.querySelector('#date');
-	const forecastContainer = document.querySelector('.forecast-content');
+	const forecastDaily = document.querySelector('.daily');
+	const forecastHourly = document.querySelector('.hourly');
 
 	let unitCode = 'C';
 	let unitSymbol;
@@ -25,42 +26,63 @@ const DOM = (() => {
 	const getWeatherIcon = (iconcode, container) => {
 		const img = document.createElement('img');
 		img.src = `http://openweathermap.org/img/w/${iconcode}.png`;
-
-		console.log(img);
+		img.classList.add('weather-icon');
 		container.appendChild(img);
 	};
 
-	const resetForecastContainer = () => {
-		while(forecastContainer.lastChild) {
-			forecastContainer.removeChild(forecastContainer.firstChild);
+	const resetForecastContainer = (element) => {
+		while(element.lastChild) {
+			element.removeChild(element.firstChild);
 		}
 	};
 
-	const createForecastCard = (weather) => {
+	const createForecastCard = (weather, idx) => {
 		const div = document.createElement('div');
 		div.classList.add('forecast-card');
+		
 		const date = document.createElement('p');
-		date.textContent = weather.date;
+		date.textContent = idx === 0 ? "Today" : weather.date;
+		
 		const imgContainer = document.createElement('div');
-		imgContainer.textContent = weather.description; 
+		getWeatherIcon(weather.icon, imgContainer);
+		
 		const h2 = document.createElement('h2');
 		h2.textContent = Math.floor(weather.temp);
 		
 		div.appendChild(date);
 		div.appendChild(imgContainer);
 		div.appendChild(h2);
-		forecastContainer.appendChild(div);
+		forecastDaily.appendChild(div);
 	};
 
-	const generateForecastCards = (obj) => {
-		resetForecastContainer();
-		obj.forEach(i => createForecastCard(i));
+	const createHourlyList = (obj) => {
+		const container = document.createElement('div');
+		container.classList.add('hour-card');
+		const time = document.createElement('p');
+		time.textContent = obj.time;
+		const desc = document.createElement('p');
+		desc.textContent = obj.description;
+		const temp = document.createElement('p');
+		temp.textContent = obj.temp;
+
+		container.appendChild(time);
+		container.appendChild(desc);
+		container.appendChild(temp);
+		forecastHourly.appendChild(container);
+	};
+
+	const generateDailyCards = (obj) => {
+		resetForecastContainer(forecastDaily);
+		obj.forEach((i, idx) => createForecastCard(i, idx));
+	};
+
+	const generateHourlyList = (obj) => {
+		resetForecastContainer(forecastHourly);
+		obj.forEach(i => createHourlyList(i));
 	};
 
 	const displayData = async () => {
 		const obj = await weather.getWeather(searchInput.value || "Philippines", unitCode);
-
-		console.log(obj);
 		if(Object.keys(obj).length == 0) {
 			alert("City not found");
 			searchInput.value = "";
@@ -71,11 +93,11 @@ const DOM = (() => {
 		temperature.textContent = `${obj.temp}`;
 		weatherDesc.textContent = obj.description.charAt(0).toUpperCase() + obj.description.slice(1);
 		feelsLike.textContent = `${obj.feels}`;
-		rainChance.textContent = `${obj.list[0].pop * 100} %`;
+		rainChance.textContent = `${obj.daily[0].pop * 100} %`;
 		humidity.textContent = obj.humidity + " %";
 
-		generateForecastCards(obj.list);
-
+		generateDailyCards(obj.daily);
+		generateHourlyList(obj.hourly);
 	};
 
 	const searchCity = (e) => {

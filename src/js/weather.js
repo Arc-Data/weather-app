@@ -7,7 +7,6 @@ const weather = (() => {
 	};
 
 	const LocationData = (obj) => {
-		console.log(obj);
 		return {
 			lon: obj.coord.lon, 
 			lat: obj.coord.lat,
@@ -22,31 +21,45 @@ const weather = (() => {
 	};
 
 	const ForecastData = (obj) => {
-		let dateString = obj.dt_txt.split(" ")[0];
-		dateString = new Date(dateString).toLocaleString("en-US",{
-			weekday : "short",
-		});
+		let dateString = obj.dt_txt.split(" ");
+		dateString = new Date(dateString[0])
+			.toLocaleString("en-US", {
+				weekday : "short",
+			});
+
+		let timeString = new Date(obj.dt_txt)
+			.toLocaleTimeString("en-us", {
+				hour12: false,
+				hour: "2-digit",
+				minute: "2-digit",
+			});
 
 		return {
 			pop: obj.pop,
 			temp: obj.main.temp,
-			description: obj.weather[0].main,
+			description: obj.weather[0].description,
 			date: dateString,
+			time: timeString,
+			icon: obj.weather[0].icon,
 		};
 	};
 
 	const weatherForecastData = (forecast) => {
-		const forecastList = [
+		const dailyList = [
 			forecast.list[2], 
 			forecast.list[10],
 			forecast.list[18],
 			forecast.list[26],
 			forecast.list[34],
 		];
-		console.log(forecastList[0]);
-		const list = forecastList.map( i => ForecastData(i));
+		
+		const daily = dailyList.map( i => ForecastData(i));
+		const hourlyList = forecast.list.slice(0,8);
+		const hourly = hourlyList.map( i => ForecastData(i));	
+
 		return {
-			list: list
+			daily: daily,
+			hourly: hourly,
 		};
 	};
 
@@ -87,8 +100,6 @@ const weather = (() => {
 			locationForecast
 		);
 
-
-		// console.log(data);
 		return data;
 	};
 
