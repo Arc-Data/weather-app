@@ -17,6 +17,7 @@ const weather = (() => {
 			description: obj.weather[0].description,
 			icon: obj.weather[0].icon,
 			country: obj.sys.country,
+			humidity:obj.main.humidity,
 		};
 	};
 

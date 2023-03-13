@@ -8,6 +8,7 @@ const DOM = (() => {
 	const rainChance = document.querySelector('#rain-chance');
 	const feelsLike = document.querySelector('#feels-like');
 	const temperature = document.querySelector('#temperature');
+	const humidity = document.querySelector('#humidity');
 	const date = document.querySelector('#date');
 
 	let unitCode = 'C';
@@ -23,8 +24,6 @@ const DOM = (() => {
 	const getWeatherIcon = (iconcode, container) => {
 		const img = document.createElement('img');
 		img.src = `http://openweathermap.org/img/w/${iconcode}.png`;
-		img.style.width = '40px';
-		img.style.height = '40px';
 
 		console.log(img);
 		container.appendChild(img);
@@ -42,9 +41,10 @@ const DOM = (() => {
 
 		cityName.textContent = `${obj.name}, ${obj.country}`;
 		temperature.textContent = `${obj.temp}`;
-		// weatherDesc.textContent = obj.description.charAt(0).toUpperCase() + obj.description.slice(1);
-		// feelsLike.textContent = `Feels like : ${obj.feels}${unitSymbol}`;
-		// rainChance.textContent = `Chance of rain : ${obj.list[0].pop * 100}%`;
+		weatherDesc.textContent = obj.description.charAt(0).toUpperCase() + obj.description.slice(1);
+		feelsLike.textContent = `${obj.feels}`;
+		rainChance.textContent = `${obj.list[0].pop * 100} %`;
+		humidity.textContent = obj.humidity + " %";
 	};
 
 	const searchCity = (e) => {
