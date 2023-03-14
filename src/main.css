@@ -30,13 +30,12 @@ body {
 	margin:0 auto;
 	display:grid;
 	grid-template-columns: 340px 1fr;
-	height:100vh;
+	min-height:100vh;
 }	
 
-.page-content > div {
+.main-container, .info-container {
 	padding:40px 40px;
 }
-
 	
 .main-container {
 	background:rgba(0,0,0,0.8);
@@ -46,8 +45,8 @@ body {
 	gap:60px;
 }
 
-.weather-icon {
-
+#city-name {
+	color: #a5a5a5;
 }
 
 .main-weather-details {
@@ -144,10 +143,6 @@ h2 {
 	border: 1px solid #ccc;
 	border-radius:12px;
 }
-/*
-.farenheit-container {
-	background:black;
-}*/
 
 .farenheit {
 	right:0;
@@ -165,7 +160,6 @@ h2 {
 }
 
 .forecast-tab-container {
-/*	width: 100%;*/
 	border-bottom: 1px solid #ccc;
 	display:flex;
 	gap:20px;
@@ -191,7 +185,8 @@ h2 {
 }
 
 .forecast-card {
-	width: 120px;
+	display:flex;
+	flex-direction:column;
 	text-align:center;
 	flex:1;
 
@@ -202,7 +197,61 @@ h2 {
 
 .hour-card {
 	padding:20px;
+	font-size:16px;
 	border:1px solid #ccc;
 	display: flex;
 	justify-content:space-between;
+}
+
+@media (max-width: 800px){
+
+.page-content {
+	display:grid;
+	grid-template-columns: 1fr;
+}
+
+.overlay {
+	height:0;
+}
+
+.forecast-card {
+	display:grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap:30px;
+}
+
+.weekday {
+	grid-column: 1/-1;
+}
+
+.main-container {
+	padding:60px 20px;
+	gap: 15px;
+}
+
+.info-container {
+	padding:5px;
+	gap:5px;
+}
+
+.forecast-container {
+	border-radius: 0;
+	width:100vw;
+}
+
+.daily {
+	display:flex;
+	flex-direction: row;
+	gap:0;
+	border: none;
+	overflow-x: auto;
+}
+
+.forecast-card {
+	box-shadow: none;
+}
+
+.hourly {
+	grid-template-columns: 1fr;
+}
 }

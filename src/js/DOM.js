@@ -41,8 +41,9 @@ const DOM = (() => {
 	const createForecastCard = (weather, idx) => {
 		const div = document.createElement('div');
 		div.classList.add('forecast-card');
-		
+
 		const date = document.createElement('p');
+		date.classList.add('weekday');
 		date.textContent = idx === 0 ? "Today" : weather.date;
 		
 		const imgContainer = document.createElement('div');
