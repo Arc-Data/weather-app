@@ -114,6 +114,35 @@ h2 {
 	gap:20px;
 }
 
+.button-container {
+	display:flex;
+	gap:10px;
+	align-items: flex-end;
+}
+
+.toggle-container {
+	width:50px;
+	height:20px;
+	border-radius:12px;
+	background:white;
+	position:relative;
+}
+
+.toggle-container:hover {
+	cursor:pointer;
+}
+
+.switch {
+	position:absolute;
+	height:100%;
+	width:20px;
+	transform: scale(1.2);
+	box-shadow: 0 0 .5em rgba(0,0,0,0.5);
+	background:black;
+	border: 1px solid #ccc;
+	border-radius:12px;
+}
+
 .forecast-container {
 	background:white;
 	color: black;
