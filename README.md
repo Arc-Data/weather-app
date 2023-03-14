@@ -1,5 +1,7 @@
 # weather-app
 
+This is a project made by following The Odin Project's Full Stack JavaScript Course
+
 This was actually a fun project. I was surprised that I can make it this far without asking for 
 help in some parts where I initially thought coding would stress me out. Minor nitpick is 
 that I am unable to access data regarding maximum and minimum temperatures of certain locations
