@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Weather Application</title>
+	<script src="https://kit.fontawesome.com/fc5a762e4d.js" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script defer src="main.c529d3886103bbae4cbc.js"></script></head>
+<body>
+	<div class="overlay"></div>
+	<div class="page-content">
+		<div class="main-container">
+			<div class="search-container">
+				<form method = "POST" action = "" id = "searchCity">
+					<input type="search" name="weather" id = "search" placeholder = "Search for city">
+					<span class = "search-icon">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</span>
+				</form>
+			</div>
+			<div class="main-weather">
+				<h1 id = 'temperature' class = 'temperature'>
+					...
+				</h1>
+				<h2 id="city-name">...</h2>
+			</div>
+			<div class="main-weather-details">
+
+				<p id="weather-desc"></p>
+				<div class="weather-column">
+					<p>Feels like  </p> 
+					<p id="feels-like"></p>
+				</div>
+				<div class="weather-column">
+					<p>Rain Chance  </p> 
+					<p id="rain-chance"></p>
+				</div>
+				<div class="weather-column">
+					<p>Humidity  </p> 
+					<p id="humidity"></p>
+				</div>
+			</div>
+			<div class="button-container">
+				<span>Celsius</span>
+				<div class="toggle-container">
+					<div class="toggle">
+						
+					</div>
+				</div>
+				<span>Farenheit</span>
+			</div>
+		</div>
+		<div class="info-container">
+			<div class="forecast-container">
+				<div class="forecast-tab-container">
+					5 Day Forecast
+				</div>
+				<div class="forecast-content daily">
+					
+				</div>
+			</div>
+			<div class="forecast-container hour-container">
+				<div class="forecast-tab-container">
+					8 Hour Forecast
+				</div>
+				<div class="forecast-content hourly">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
