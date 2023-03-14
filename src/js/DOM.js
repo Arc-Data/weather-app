@@ -12,9 +12,24 @@ const DOM = (() => {
 	const date = document.querySelector('#date');
 	const forecastDaily = document.querySelector('.daily');
 	const forecastHourly = document.querySelector('.hourly');
+	const toggleContainer = document.querySelector('.toggle-container');
+	const toggle = toggleContainer.querySelector('.toggle');
 
 	let unitCode = 'C';
 	let unitSymbol;
+
+	const toggleReading = () => {
+		const reading = toggleContainer.dataset.reading;
+		toggleContainer.dataset.reading = reading === 'C' ? 'F' : 'C';
+		// console.log(toggleContainer.dataset.reading);
+		toggle.classList.toggle('farenheit');
+		toggleContainer.classList.toggle('farenheit-container');
+	};
+
+	const toggleFarenheit = () => {
+
+	};
+
 
 	const getUnitSymbol = () => {
 		const unit = unitCode === 'C' ? "&#8451;" : "&#8457;";
@@ -106,11 +121,13 @@ const DOM = (() => {
 	};
 
 	const init = () => {
+		toggleContainer.dataset.reading = 'C';
 		displayData();
 	};
 
 	search.addEventListener('submit', searchCity);
-	
+	toggleContainer.addEventListener('click', toggleReading);
+
 	init();
 })();
 

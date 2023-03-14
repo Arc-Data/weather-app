@@ -126,13 +126,15 @@ h2 {
 	border-radius:12px;
 	background:white;
 	position:relative;
+	border:1px solid white;
+	transition: all .3s ease-in-out;
 }
 
 .toggle-container:hover {
 	cursor:pointer;
 }
 
-.switch {
+.toggle {
 	position:absolute;
 	height:100%;
 	width:20px;
@@ -141,6 +143,15 @@ h2 {
 	background:black;
 	border: 1px solid #ccc;
 	border-radius:12px;
+}
+/*
+.farenheit-container {
+	background:black;
+}*/
+
+.farenheit {
+	right:0;
+/*	background:white;*/
 }
 
 .forecast-container {
