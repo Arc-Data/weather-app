@@ -27,7 +27,7 @@ const DOM = (() => {
 
 	const getWeatherIcon = (iconcode, container) => {
 		const img = document.createElement('img');
-		img.src = `http://openweathermap.org/img/w/${iconcode}.png`;
+		img.src = `https://openweathermap.org/img/w/${iconcode}.png`;
 		img.classList.add('weather-icon');
 		container.appendChild(img);
 	};
