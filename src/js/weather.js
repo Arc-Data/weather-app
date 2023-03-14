@@ -65,7 +65,8 @@ const weather = (() => {
 
 	const getLocationWeather = async (location) => {
 		const response = await fetch(`
-			http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${apiKey}&units=${measureUnit}
+			http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${apiKey}&units=${measureUnit},
+			{mode: 'cors'}
 		`);
 
 		if(response.status == 200) {
@@ -78,7 +79,8 @@ const weather = (() => {
 
 	const getLocationForecast = async(lat, lon) => {
 		const response = await fetch(`
-			http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${measureUnit}
+			http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${measureUnit},
+			{mode: 'cors'}
 		`);
 		const obj = await response.json();
 		return weatherForecastData(obj);
