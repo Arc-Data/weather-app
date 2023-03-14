@@ -17,13 +17,15 @@ const DOM = (() => {
 
 	let unitCode = 'C';
 	let unitSymbol;
+	let city = 'Philippines';
 
 	const toggleReading = () => {
-		const reading = toggleContainer.dataset.reading;
-		toggleContainer.dataset.reading = reading === 'C' ? 'F' : 'C';
+		// const reading = toggleContainer.dataset.reading;
+		unitCode = unitCode === 'C' ? 'F' : 'C';
 		// console.log(toggleContainer.dataset.reading);
 		toggle.classList.toggle('farenheit');
 		toggleContainer.classList.toggle('farenheit-container');
+		displayData(city);
 	};
 
 	const toggleFarenheit = () => {
@@ -96,14 +98,15 @@ const DOM = (() => {
 		obj.forEach(i => createHourlyList(i));
 	};
 
-	const displayData = async () => {
-		const obj = await weather.getWeather(searchInput.value || "Philippines", unitCode);
+	const displayData = async (location) => {
+		const obj = await weather.getWeather(searchInput.value || location, unitCode);
 		if(Object.keys(obj).length == 0) {
 			alert("City not found");
 			searchInput.value = "";
 			return;
 		}
 
+		city = obj.name;
 		cityName.textContent = `${obj.name}, ${obj.country}`;
 		temperature.textContent = `${obj.temp}`;
 		weatherDesc.textContent = obj.description.charAt(0).toUpperCase() + obj.description.slice(1);
@@ -122,7 +125,7 @@ const DOM = (() => {
 
 	const init = () => {
 		toggleContainer.dataset.reading = 'C';
-		displayData();
+		displayData(city);
 	};
 
 	search.addEventListener('submit', searchCity);
