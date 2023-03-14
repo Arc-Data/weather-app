@@ -15,29 +15,14 @@ const DOM = (() => {
 	const toggleContainer = document.querySelector('.toggle-container');
 	const toggle = toggleContainer.querySelector('.toggle');
 
-	let unitCode = 'C';
-	let unitSymbol;
+	let unitCode = "°C";
 	let city = 'Philippines';
 
 	const toggleReading = () => {
-		// const reading = toggleContainer.dataset.reading;
-		unitCode = unitCode === 'C' ? 'F' : 'C';
-		// console.log(toggleContainer.dataset.reading);
+		unitCode = unitCode === "°C" ? "°F" : "°C";
 		toggle.classList.toggle('farenheit');
 		toggleContainer.classList.toggle('farenheit-container');
 		displayData(city);
-	};
-
-	const toggleFarenheit = () => {
-
-	};
-
-
-	const getUnitSymbol = () => {
-		const unit = unitCode === 'C' ? "&#8451;" : "&#8457;";
-		const textarea = document.createElement('textarea');
-		textarea.innerHTML = unit;
-		unitSymbol = textarea.value;
 	};
 
 	const getWeatherIcon = (iconcode, container) => {
@@ -64,7 +49,7 @@ const DOM = (() => {
 		getWeatherIcon(weather.icon, imgContainer);
 		
 		const h2 = document.createElement('h2');
-		h2.textContent = Math.floor(weather.temp);
+		h2.textContent = Math.floor(weather.temp) + unitCode;
 		
 		div.appendChild(date);
 		div.appendChild(imgContainer);
@@ -80,7 +65,7 @@ const DOM = (() => {
 		const desc = document.createElement('p');
 		desc.textContent = obj.description;
 		const temp = document.createElement('p');
-		temp.textContent = obj.temp;
+		temp.textContent = `${obj.temp} ${unitCode}`;
 
 		container.appendChild(time);
 		container.appendChild(desc);
@@ -108,9 +93,9 @@ const DOM = (() => {
 
 		city = obj.name;
 		cityName.textContent = `${obj.name}, ${obj.country}`;
-		temperature.textContent = `${obj.temp}`;
+		temperature.textContent = `${obj.temp} ${unitCode}`;
 		weatherDesc.textContent = obj.description.charAt(0).toUpperCase() + obj.description.slice(1);
-		feelsLike.textContent = `${obj.feels}`;
+		feelsLike.textContent = `${obj.feels} ${unitCode}`;
 		rainChance.textContent = `${obj.daily[0].pop * 100} %`;
 		humidity.textContent = obj.humidity + " %";
 
@@ -124,7 +109,6 @@ const DOM = (() => {
 	};
 
 	const init = () => {
-		toggleContainer.dataset.reading = 'C';
 		displayData(city);
 	};
 

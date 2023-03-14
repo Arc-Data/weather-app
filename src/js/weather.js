@@ -3,7 +3,7 @@ const weather = (() => {
 	let measureUnit = "";
 
 	const useMeasureUnit = (unit) => {
-		measureUnit = unit === 'C' ? "metric" : "imperial";
+		measureUnit = unit === "°C" ? "metric" : "imperial";
 	};
 
 	const LocationData = (obj) => {
@@ -85,6 +85,7 @@ const weather = (() => {
 	};
 
 	const getWeather = async (location, unit) => {
+		// console.log(unit);
 		useMeasureUnit(unit); 
 		
 		const data = {};
